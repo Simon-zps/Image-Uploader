@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$main-color: #e7c6ff;
+$blk-color: #171614;
+$grey-color: #36363683;
+$main-font: 'Poppins', sans-serif;
+
+
+.container {
+    text-align: center;
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+
+        width: 30rem;
+        height: 33rem;
+
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        @media screen and (max-width: 768px) {
+            width: 25rem;
+            height: 33rem;
+        }
+
+        .card-header {
+
+            h1 {
+                font-size: 1.25rem;
+                font-weight: 400;
+                color: $blk-color;
+
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            p {
+                font-size: .75rem;
+                font-weight: 400;
+                color: $blk-color;
+
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        .card-body {
+            border: 2px dashed $main-color;
+            border-radius: 1rem;
+
+            background-color: #e7c6ff2f;
+
+            padding: 3rem;
+
+            height: 15rem;
+            width: 25rem;
+
+            margin-bottom: 1rem;
+
+            img {
+                padding-bottom: 1rem;
+            }
+
+            p {
+                font-size: .80rem;
+                font-weight: 400;
+                color: $grey-color;
+            }
+
+            @media screen and (max-width: 768px) {
+                width: 20rem;
+            }
+        }
+
+        .or {
+            margin-bottom: 1rem;
+        }
+
+        .choose-file {
+            background-color: $main-color;
+            border: none;
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 3rem;
+            width: 7rem;
+
+            color: #fff;
+            border-radius: .65rem;
+            
+            font-size: .9rem;
+
+            cursor: pointer;
+        }
+    }
+}
