@@ -46,6 +46,8 @@ const Home = () => {
     );
   };
 
+  // tbd
+
   // <img src={dragAndDropImg} alt="drag and drop something here..." />
   //       <p>Drag & Drop your image here</p>
 
