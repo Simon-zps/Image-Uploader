@@ -27,26 +27,40 @@ const Home = () => {
   const DragDrop = () => {
     const onDrop = useCallback((acceptedFiles) => {
       console.log(acceptedFiles);
-      setImage(acceptedFiles[0]);
-      uploadImage();
+      // setImage(acceptedFiles[0]);
+      // uploadImage();
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
     });
 
     return (
-      <div {...getRootProps()}>
+      <div
+        {...getRootProps()}
+        style={{
+          border: "3px solid red",
+          width: "20rem",
+          height: "30rem",
+          paddingTop: "3.5rem",
+          paddingBottom: "3.5rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <>
+            <img src={dragAndDropImg} alt="drag and drop something here..." />
+            <p>Drag & Drop your image here</p>
+          </>
         )}
       </div>
     );
   };
-
-  // tbd
 
   // <img src={dragAndDropImg} alt="drag and drop something here..." />
   //       <p>Drag & Drop your image here</p>

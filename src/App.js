@@ -14,6 +14,10 @@ class App extends Component {
     };
   }
 
+  onComponentDidMount() {
+    console.log("componentDidMount");
+  }
+
   render() {
     return (
       <div className="App">
