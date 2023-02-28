@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import { storage } from "../../services/firebase";
 import { ref, uploadBytes } from "firebase/storage";
@@ -14,16 +14,28 @@ import "./Home.scss";
 const Home = ({ isLoading, setLoading, handleImageNull }) => {
   const [image, setImage] = useState(null);
 
+  const getLastRequestData = (callback) => {
+    database.ref("lastRequestData").on("value", (snapshot) => {
+      const data = snapshot.val();
+      callback(data);
+    });
+  };
+
+  useEffect(() => {
+    if (image === null) {
+      return;
+    }
+
+    uploadImage(image);
+  }, [image]);
+
   const uploadImage = () => {
     console.log("here");
     if (image === null) return;
     setLoading(true);
-    console.log(isLoading);
-    console.log("here 2");
     const imageRef = ref(storage, `images/${uuidv4()}`);
     console.log("sending image to firebase");
     uploadBytes(imageRef, image).then(() => {
-      console.log("here 3");
       console.log("successfully sent image to firebase");
       setLoading(false);
     });
@@ -34,7 +46,7 @@ const Home = ({ isLoading, setLoading, handleImageNull }) => {
       console.log(acceptedFiles);
       setImage(acceptedFiles[0]);
       uploadImage();
-      console.log("success", image);
+      console.log("successfully ran Drag & Drop function. Output:", image);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -78,7 +90,7 @@ const Home = ({ isLoading, setLoading, handleImageNull }) => {
           id="file-input"
           type="file"
           style={{ display: "none" }}
-          onChange={handleImageChange}
+          onChange={(e) => handleImageChange(e)}
         />
       </div>
     </div>

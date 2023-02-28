@@ -112,11 +112,10 @@ $main-font: "Poppins", sans-serif;
 }
 
 .drag-drop {
-  // border: 3px solid red;
-  width: 20rem;
+   border: 3px solid red;
+  width: 25rem;
   height: 30rem;
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
+  padding: 3.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,11 +123,10 @@ $main-font: "Poppins", sans-serif;
 }
 
 .drag-drop-2 {
-  // border: 3px solid blue;
-  width: 20rem;
-  height: 30rem;
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
+   border: 3px solid blue;
+  width: 25rem;
+  height: 5rem;
+  padding: 3.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
