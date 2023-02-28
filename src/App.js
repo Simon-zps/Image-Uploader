@@ -4,28 +4,54 @@ import "./App.css";
 import Home from "./components/Home/Home";
 import Uploading from "./components/Uploading/Uploading";
 
-const uploadImage = () => {};
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
       image: null,
+      isLoading: false,
     };
   }
 
-  onComponentDidMount() {
-    console.log("componentDidMount");
+  // loading = () => {
+  //   if (this.state.isLoading === true) {
+  //     return <Uploading />;
+  //   } else if (this.state.isLoading === false && this.state.image === null) {
+  //     return;
+  //   } else {
+  //     // <Result />;
+  //     console.log("result");
+  //   }
+  // };
+
+  componentDidMount() {
+    this.setState({ isLoading: false });
   }
 
+  handleLoading = (loadingState) => {
+    this.setState({ isLoading: loadingState });
+  };
+
+  handleImageNull = () => {
+    this.setState({ image: null });
+  };
+
+  handleWhatsHere = () => {
+    if (this.state.isLoading === false && this.state.image === null) {
+      return (
+        <Home
+          isLoading={this.state.isLoading}
+          setLoading={this.handleLoading}
+          handleImageNull={this.handleImageNull}
+        />
+      );
+    } else if (this.state.isLoading === true) {
+      return <Uploading />;
+    }
+  };
+
   render() {
-    return (
-      <div className="App">
-        {/* <Home uploadImage={uploadImage} image={this.state.image} /> */}
-        <Uploading />
-      </div>
-    );
+    return <div className="App">{this.handleWhatsHere()}</div>;
   }
 }
 

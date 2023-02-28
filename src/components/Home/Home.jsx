@@ -11,23 +11,30 @@ import { useDropzone } from "react-dropzone";
 
 import "./Home.scss";
 
-const Home = () => {
+const Home = ({ isLoading, setLoading, handleImageNull }) => {
   const [image, setImage] = useState(null);
+
   const uploadImage = () => {
+    console.log("here");
     if (image === null) return;
+    setLoading(true);
+    console.log(isLoading);
+    console.log("here 2");
     const imageRef = ref(storage, `images/${uuidv4()}`);
     console.log("sending image to firebase");
     uploadBytes(imageRef, image).then(() => {
+      console.log("here 3");
       console.log("successfully sent image to firebase");
+      setLoading(false);
     });
   };
 
   const DragDrop = () => {
     const onDrop = useCallback((acceptedFiles) => {
       console.log(acceptedFiles);
-      // setImage(acceptedFiles[0]);
-      // uploadImage();
-      // console.log("success", image);
+      setImage(acceptedFiles[0]);
+      uploadImage();
+      console.log("success", image);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -48,8 +55,12 @@ const Home = () => {
     );
   };
 
-  // <img src={dragAndDropImg} alt="drag and drop something here..." />
-  //       <p>Drag & Drop your image here</p>
+  const handleImageChange = (e) => {
+    console.log(e.target.files[0]);
+    setImage(e.target.files[0]);
+    console.log(image);
+    uploadImage(); // call the uploadImage function after setting the image state
+  };
 
   return (
     <div className="container">
@@ -63,7 +74,12 @@ const Home = () => {
         <label htmlFor="file-input" className="choose-file">
           Choose file
         </label>
-        <input id="file-input" type="file" style={{ display: "none" }} />
+        <input
+          id="file-input"
+          type="file"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
       </div>
     </div>
   );
