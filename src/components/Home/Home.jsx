@@ -11,8 +11,6 @@ import { useDropzone } from "react-dropzone";
 
 import "./Home.scss";
 
-const fileTypes = ["JPG", "PNG"];
-
 const Home = () => {
   const [image, setImage] = useState(null);
   const uploadImage = () => {
@@ -29,29 +27,17 @@ const Home = () => {
       console.log(acceptedFiles);
       // setImage(acceptedFiles[0]);
       // uploadImage();
+      // console.log("success", image);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
     });
 
     return (
-      <div
-        {...getRootProps()}
-        style={{
-          border: "3px solid red",
-          width: "20rem",
-          height: "30rem",
-          paddingTop: "3.5rem",
-          paddingBottom: "3.5rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
+      <div {...getRootProps()} className="drag-drop">
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p className="drag-drop-2">Drop the files here ...</p>
         ) : (
           <>
             <img src={dragAndDropImg} alt="drag and drop something here..." />
