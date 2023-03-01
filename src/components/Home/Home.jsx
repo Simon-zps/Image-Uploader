@@ -11,15 +11,8 @@ import { useDropzone } from "react-dropzone";
 
 import "./Home.scss";
 
-const Home = ({ isLoading, setLoading, handleImageNull }) => {
+const Home = ({ isLoading, setLoading, handleHasResults }) => {
   const [image, setImage] = useState(null);
-
-  const getLastRequestData = (callback) => {
-    database.ref("lastRequestData").on("value", (snapshot) => {
-      const data = snapshot.val();
-      callback(data);
-    });
-  };
 
   useEffect(() => {
     if (image === null) {
@@ -27,26 +20,25 @@ const Home = ({ isLoading, setLoading, handleImageNull }) => {
     }
 
     uploadImage(image);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [image]);
 
   const uploadImage = () => {
-    console.log("here");
     if (image === null) return;
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
-    console.log("sending image to firebase");
     uploadBytes(imageRef, image).then(() => {
       console.log("successfully sent image to firebase");
       setLoading(false);
+      handleHasResults();
     });
   };
 
   const DragDrop = () => {
     const onDrop = useCallback((acceptedFiles) => {
-      console.log(acceptedFiles);
       setImage(acceptedFiles[0]);
       uploadImage();
-      console.log("successfully ran Drag & Drop function. Output:", image);
+      console.log("successfully ran Drag & Drop function --- Output:", image);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -68,9 +60,7 @@ const Home = ({ isLoading, setLoading, handleImageNull }) => {
   };
 
   const handleImageChange = (e) => {
-    console.log(e.target.files[0]);
     setImage(e.target.files[0]);
-    console.log(image);
     uploadImage(); // call the uploadImage function after setting the image state
   };
 

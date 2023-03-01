@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Home from "./components/Home/Home";
 import Uploading from "./components/Uploading/Uploading";
+import Result from "./components/Result/Result";
 
 class App extends Component {
   constructor(props) {
@@ -10,43 +11,45 @@ class App extends Component {
     this.state = {
       image: null,
       isLoading: false,
+      hasResults: false,
     };
   }
 
-  // loading = () => {
-  //   if (this.state.isLoading === true) {
-  //     return <Uploading />;
-  //   } else if (this.state.isLoading === false && this.state.image === null) {
-  //     return;
-  //   } else {
-  //     // <Result />;
-  //     console.log("result");
-  //   }
-  // };
-
   componentDidMount() {
+    this.setState({ image: null });
+
     this.setState({ isLoading: false });
+
+    if (this.state.isLoading === true) {
+      this.setState({ isOnHome: true });
+    }
   }
 
   handleLoading = (loadingState) => {
     this.setState({ isLoading: loadingState });
   };
 
-  handleImageNull = () => {
-    this.setState({ image: null });
+  handleHasResults = () => {
+    this.setState({ hasResults: true });
   };
 
   handleWhatsHere = () => {
-    if (this.state.isLoading === false && this.state.image === null) {
+    if (
+      this.state.isLoading === false &&
+      this.state.image === null &&
+      this.state.hasResults === false
+    ) {
       return (
         <Home
           isLoading={this.state.isLoading}
           setLoading={this.handleLoading}
-          handleImageNull={this.handleImageNull}
+          handleHasResults={this.handleHasResults}
         />
       );
     } else if (this.state.isLoading === true) {
       return <Uploading />;
+    } else if (this.state.hasResults === true) {
+      return <Result />;
     }
   };
 
