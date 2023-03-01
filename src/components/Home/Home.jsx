@@ -1,18 +1,17 @@
 import React, { useState, useCallback, useEffect } from "react";
-
 import { storage } from "../../services/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-
 import { v4 as uuidv4 } from "uuid";
-
 import dragAndDropImg from "../../assets/download.svg";
-
 import { useDropzone } from "react-dropzone";
+import Alert from "@mui/material/Alert";
 
 import "./Home.scss";
 
 const Home = ({ isLoading, setLoading, handleHasResults }) => {
   const [image, setImage] = useState(null);
+  const [errMsg, setErrorMsg] = useState(false);
+  const [hasErr, setErr] = useState(false);
 
   useEffect(() => {
     if (image === null) {
@@ -29,8 +28,8 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
     const imageRef = ref(storage, `images/${uuidv4()}`);
     uploadBytes(imageRef, image).then(() => {
       console.log("successfully sent image to firebase");
-      setLoading(false);
       handleHasResults();
+      setLoading(false);
     });
   };
 
@@ -60,12 +59,44 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
-    uploadImage(); // call the uploadImage function after setting the image state
+    const file = e.target.files[0];
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
+
+    if (file && allowedTypes.includes(file.type)) {
+      setImage(file);
+      uploadImage();
+    } else {
+      setErr(true);
+      showErrMsg();
+      console.log("here");
+    }
+  };
+
+  const showErrMsg = () => {
+    setErrorMsg(
+      <Alert
+        icon={false}
+        onClose={() => {
+          hideErrMsg();
+        }}
+        style={{
+          marginBottom: "1.5rem",
+          backgroundColor: "#7678ed",
+          color: "#fff",
+        }}
+      >
+        Please upload a valid image file. (png, jpg, jpeg, heic)
+      </Alert>
+    );
+  };
+
+  const hideErrMsg = () => {
+    setErrorMsg(false);
   };
 
   return (
     <div className="container">
+      {errMsg}
       <div className="card">
         <div className="card-header">
           <h1>Upload your image</h1>

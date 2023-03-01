@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-$main-color: #e7c6ff;
+$main-color: #7678ed;
+$hover-main: #6c6eda;
 $blk-color: #171614;
 $grey-color: #36363683;
 $main-font: "Poppins", sans-serif;
+
 
 .card-uploading {
     display: flex;
@@ -36,17 +38,17 @@ $main-font: "Poppins", sans-serif;
     }
 
     .loader {
-        background-color: #ead5f977;
-        color: #e7c6ff;
+        background-color: #7678ed77;
+        color: $main-color;
         border-radius: 1rem;
         height: .45rem;
     }
 
     .css-5ir5xx-MuiLinearProgress-bar1 {
-        background-color: #e7c6ff;
+        background-color: $main-color;
     }
 
     .css-1r8wrcl-MuiLinearProgress-bar2 {
-        background-color: #e7c6ff;
+        background-color: $main-color;
     }
 }

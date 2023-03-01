@@ -27,10 +27,13 @@ class App extends Component {
 
   handleLoading = (loadingState) => {
     this.setState({ isLoading: loadingState });
+    console.log(this.state.hasResults);
+    console.log(this.state.isLoading);
   };
 
   handleHasResults = () => {
     this.setState({ hasResults: true });
+    this.setState({ isLoading: false });
   };
 
   handleWhatsHere = () => {
@@ -48,8 +51,11 @@ class App extends Component {
       );
     } else if (this.state.isLoading === true) {
       return <Uploading />;
-    } else if (this.state.hasResults === true) {
-      return <Result />;
+    } else if (
+      this.state.hasResults === true &&
+      this.state.isLoading === false
+    ) {
+      return <Result setLoading={this.handleLoading} />;
     }
   };
 
