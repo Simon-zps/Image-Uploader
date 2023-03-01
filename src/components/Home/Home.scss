@@ -138,3 +138,9 @@ $main-font: "Poppins", sans-serif;
     height: 15rem;
   }
 }
+
+.err-msg {
+  @media screen and (max-width: 768px) {
+    width: 25rem;
+  }
+}

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import dragAndDropImg from "../../assets/download.svg";
 import { useDropzone } from "react-dropzone";
 import Alert from "@mui/material/Alert";
+import { motion } from "framer-motion";
 
 import "./Home.scss";
 
@@ -74,19 +75,25 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
 
   const showErrMsg = () => {
     setErrorMsg(
-      <Alert
-        icon={false}
-        onClose={() => {
-          hideErrMsg();
-        }}
-        style={{
-          marginBottom: "1.5rem",
-          backgroundColor: "#7678ed",
-          color: "#fff",
-        }}
+      <motion.div
+        initial={{ y: -1000, scale: 0, opacity: 0 }}
+        animate={{ y: 0, scale: 1, opacity: 1 }}
       >
-        Please upload a valid image file. (png, jpg, jpeg, heic)
-      </Alert>
+        <Alert
+          icon={false}
+          onClose={() => {
+            hideErrMsg();
+          }}
+          style={{
+            marginBottom: "1.5rem",
+            backgroundColor: "#7678ed",
+            color: "#fff",
+          }}
+          className="err-msg"
+        >
+          Please upload a valid image file. (png, jpg, jpeg, heic)
+        </Alert>
+      </motion.div>
     );
   };
 
