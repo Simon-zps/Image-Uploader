@@ -53,6 +53,17 @@ const Result = () => {
     getLastUploadedImage();
   }, []);
 
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(imageUrl)
+      .then(() => {
+        alert(`Copied "${imageUrl}" to clipboard!`);
+      })
+      .catch((error) => {
+        alert(`Failed to copy "${imageUrl}" to clipboard: ${error}`);
+      });
+  };
+
   return (
     <div className="result-container">
       <div className="result-card">
@@ -64,7 +75,18 @@ const Result = () => {
           <div className="result-image">
             <img src={imageUrl} alt="What you uploaded" />
           </div>
-          <div className="result-link"></div>
+          <div className="result-link">
+            <div className="bottom-wrapper">
+              <div className="wrapper-center">
+                <a href={{ imageUrl }}>
+                  <span>{imageUrl}</span>
+                </a>
+                <button className="copy-btn" onClick={() => copyToClipboard()}>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
