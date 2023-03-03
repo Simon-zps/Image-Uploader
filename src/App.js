@@ -5,6 +5,14 @@ import Home from "./components/Home/Home";
 import Uploading from "./components/Uploading/Uploading";
 import Result from "./components/Result/Result";
 
+import {
+  listAll,
+  ref,
+  getStorage,
+  getMetadata,
+  getDownloadURL,
+} from "firebase/storage";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,25 +23,44 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    this.setState({ image: null });
+  getLastUploadedImage = async () => {
+    const storage = getStorage();
+    const imagesRef = ref(storage, "images/");
 
-    this.setState({ isLoading: false });
-
-    if (this.state.isLoading === true) {
-      this.setState({ isOnHome: true });
+    try {
+      const res = await listAll(imagesRef);
+      let mostRecentItem = null;
+      for (const item of res.items) {
+        const metadata = await getMetadata(item);
+        if (
+          !mostRecentItem ||
+          metadata.timeCreated > mostRecentItem.metadata.timeCreated
+        ) {
+          mostRecentItem = { ref: item, metadata };
+        }
+      }
+      if (mostRecentItem) {
+        const downloadUrl = await getDownloadURL(mostRecentItem.ref);
+        this.setState({ dwlUrl: downloadUrl });
+        return downloadUrl;
+      }
+      console.log("No images found");
+      return null;
+    } catch (error) {
+      console.log("Error retrieving last uploaded image:", error);
+      return null;
     }
-  }
+  };
 
   handleLoading = (loadingState) => {
     this.setState({ isLoading: loadingState });
-    console.log(this.state.hasResults);
-    console.log(this.state.isLoading);
   };
 
   handleHasResults = () => {
     this.setState({ hasResults: true });
-    this.setState({ isLoading: false });
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 2000);
   };
 
   handleWhatsHere = () => {
@@ -55,7 +82,7 @@ class App extends Component {
       this.state.hasResults === true &&
       this.state.isLoading === false
     ) {
-      return <Result setLoading={this.handleLoading} />;
+      return <Result getLastUploadedImage={this.getLastUploadedImage} />;
     }
   };
 

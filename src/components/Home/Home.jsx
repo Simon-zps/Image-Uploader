@@ -28,9 +28,8 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
     uploadBytes(imageRef, image).then(() => {
-      console.log("successfully sent image to firebase");
+      // console.log("successfully sent image to firebase");
       handleHasResults();
-      setLoading(false);
     });
   };
 
@@ -38,7 +37,7 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
     const onDrop = useCallback((acceptedFiles) => {
       setImage(acceptedFiles[0]);
       uploadImage();
-      console.log("successfully ran Drag & Drop function --- Output:", image);
+      // console.log("successfully ran Drag & Drop function --- Output:", image);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -69,7 +68,6 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
     } else {
       setErr(true);
       showErrMsg();
-      console.log("here");
     }
   };
 
