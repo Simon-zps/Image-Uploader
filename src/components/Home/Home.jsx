@@ -9,41 +9,38 @@ import { motion } from "framer-motion";
 
 import "./Home.scss";
 
-const Home = ({ isLoading, setLoading, handleHasResults }) => {
+const Home = ({ setLoading, handleHasResults }) => {
   const [image, setImage] = useState(null);
-  const [errMsg, setErrorMsg] = useState(false);
+  const [imageDD, setImageDD] = useState(null);
+  const [errMsg, setErrorMsg] = useState(null);
   const [hasErr, setErr] = useState(false);
 
   useEffect(() => {
-    if (image === null) {
+    if (imageDD === null) {
       return;
     }
 
-    uploadImage(image);
+    uploadImage(imageDD);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [image]);
+  }, [imageDD]);
 
   const uploadImage = () => {
-    console.log("here 2");
     if (image === null) return;
-    console.log("here 3");
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
-    uploadBytes(imageRef, image)
-      .then(() => {
-        console.log("here 4");
-
-        // console.log("successfully sent image to firebase");
-        handleHasResults();
-      })
-      .then(() => {});
+    uploadBytes(imageRef, image).then(() => {
+      handleHasResults();
+    });
   };
 
   const DragDrop = () => {
     const onDrop = useCallback((acceptedFiles) => {
-      setImage(acceptedFiles[0]);
-      uploadImage();
-      // console.log("successfully ran Drag & Drop function --- Output:", image);
+      setImageDD(acceptedFiles[0]);
+      handleDragDrop();
+      console.log(
+        "successfully ran Drag & Drop function --- Output:",
+        setImageDD
+      );
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -53,7 +50,7 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
       <div {...getRootProps()} className="drag-drop">
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p className="drag-drop-2">Drop the files here ...</p>
+          <p className="drag-drop-2">Drop your image here ...</p>
         ) : (
           <>
             <img src={dragAndDropImg} alt="drag and drop something here..." />
@@ -62,6 +59,20 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
         )}
       </div>
     );
+  };
+
+  const handleDragDrop = () => {
+    const file = imageDD;
+    console.log(file);
+    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
+
+    if (file && allowedTypes.includes(file.type)) {
+      setImage(file);
+      uploadImage();
+    } else {
+      setErr(true);
+      showErrMsg();
+    }
   };
 
   const handleImageChange = (e) => {
@@ -78,31 +89,69 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
   };
 
   const showErrMsg = () => {
-    setErrorMsg(
-      <motion.div
-        initial={{ y: -1000, scale: 0, opacity: 0 }}
-        animate={{ y: 0, scale: 1, opacity: 1 }}
-      >
-        <Alert
-          icon={false}
-          onClose={() => {
-            hideErrMsg();
+    if (hasErr) {
+      setErrorMsg(
+        <motion.div
+          initial={{ y: -100, scale: 0, opacity: 0 }}
+          animate={{ y: 0, scale: 1, opacity: 1 }}
+          transition={{
+            type: "linear",
+            damping: 10,
+            stiffness: 100,
+            delayChildren: 0.5,
           }}
-          style={{
-            marginBottom: "1.5rem",
-            backgroundColor: "#7678ed",
-            color: "#fff",
-          }}
-          className="err-msg"
         >
-          Please upload a valid image file. (png, jpg, jpeg, heic)
-        </Alert>
-      </motion.div>
-    );
+          <Alert
+            icon={false}
+            onClose={() => {
+              hideErrMsg();
+            }}
+            style={{
+              marginBottom: "1.5rem",
+              backgroundColor: "#7678ed",
+              color: "#fff",
+            }}
+            className="err-msg"
+          >
+            Please upload a valid image file. (png, jpg, jpeg, heic)
+          </Alert>
+        </motion.div>
+      );
+    } else {
+      setErrorMsg(
+        <motion.div
+          initial={{ y: -100, scale: 0, opacity: 0 }}
+          animate={{ y: 0, scale: 1, opacity: 1 }}
+          transition={{
+            type: "linear",
+            damping: 10,
+            stiffness: 100,
+            delayChildren: 0.5,
+          }}
+        >
+          <Alert
+            icon={false}
+            onClose={() => {
+              hideErrMsg();
+            }}
+            style={{
+              marginBottom: "1.5rem",
+              backgroundColor: "#7678ed",
+              color: "#fff",
+            }}
+            className="err-msg"
+          >
+            Please upload a valid image file. (png, jpg, jpeg, heic)
+          </Alert>
+        </motion.div>
+      );
+      setErr(true);
+    }
   };
 
   const hideErrMsg = () => {
-    setErrorMsg(false);
+    setErrorMsg(null);
+    setErr(false);
   };
 
   return (
