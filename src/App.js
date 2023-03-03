@@ -18,6 +18,8 @@ class App extends Component {
     super(props);
     this.state = {
       image: null,
+      imageUrl: null,
+      hasRecent: false,
       isLoading: false,
       hasResults: false,
     };
@@ -29,9 +31,11 @@ class App extends Component {
 
     try {
       const res = await listAll(imagesRef);
+      console.log("1")
       let mostRecentItem = null;
       for (const item of res.items) {
         const metadata = await getMetadata(item);
+        console.log("3")
         if (
           !mostRecentItem ||
           metadata.timeCreated > mostRecentItem.metadata.timeCreated
@@ -41,7 +45,12 @@ class App extends Component {
       }
       if (mostRecentItem) {
         const downloadUrl = await getDownloadURL(mostRecentItem.ref);
-        this.setState({ dwlUrl: downloadUrl });
+        console.log("3")
+        this.setState({ imageUrl: downloadUrl })
+        this.setState({ hasRecent: true });
+        this.setState({ hasResults: true });
+        this.setState({ isLoading: false });
+        console.log("4")
         return downloadUrl;
       }
       console.log("No images found");
@@ -57,10 +66,12 @@ class App extends Component {
   };
 
   handleHasResults = () => {
-    this.setState({ hasResults: true });
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 2000);
+    if (this.state.imageUrl !== null) {
+      return
+    } else {
+      console.log("here")
+      this.getLastUploadedImage()
+    }
   };
 
   handleWhatsHere = () => {
@@ -72,6 +83,7 @@ class App extends Component {
       return (
         <Home
           isLoading={this.state.isLoading}
+          imageUrl={this.state.imageUrl}
           setLoading={this.handleLoading}
           handleHasResults={this.handleHasResults}
         />
@@ -79,10 +91,9 @@ class App extends Component {
     } else if (this.state.isLoading === true) {
       return <Uploading />;
     } else if (
-      this.state.hasResults === true &&
-      this.state.isLoading === false
+      this.state.hasResults === true && this.state.isLoading === false
     ) {
-      return <Result getLastUploadedImage={this.getLastUploadedImage} />;
+      return <Result getLastUploadedImage={this.getLastUploadedImage} imageUrl={this.state.imageUrl} />;
     }
   };
 

@@ -24,13 +24,19 @@ const Home = ({ isLoading, setLoading, handleHasResults }) => {
   }, [image]);
 
   const uploadImage = () => {
+    console.log("here 2");
     if (image === null) return;
+    console.log("here 3");
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
-    uploadBytes(imageRef, image).then(() => {
-      // console.log("successfully sent image to firebase");
-      handleHasResults();
-    });
+    uploadBytes(imageRef, image)
+      .then(() => {
+        console.log("here 4");
+
+        // console.log("successfully sent image to firebase");
+        handleHasResults();
+      })
+      .then(() => {});
   };
 
   const DragDrop = () => {
