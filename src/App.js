@@ -31,11 +31,9 @@ class App extends Component {
 
     try {
       const res = await listAll(imagesRef);
-      console.log("1")
       let mostRecentItem = null;
       for (const item of res.items) {
         const metadata = await getMetadata(item);
-        console.log("3")
         if (
           !mostRecentItem ||
           metadata.timeCreated > mostRecentItem.metadata.timeCreated
@@ -45,12 +43,10 @@ class App extends Component {
       }
       if (mostRecentItem) {
         const downloadUrl = await getDownloadURL(mostRecentItem.ref);
-        console.log("3")
         this.setState({ imageUrl: downloadUrl })
         this.setState({ hasRecent: true });
         this.setState({ hasResults: true });
         this.setState({ isLoading: false });
-        console.log("4")
         return downloadUrl;
       }
       console.log("No images found");
@@ -69,7 +65,6 @@ class App extends Component {
     if (this.state.imageUrl !== null) {
       return
     } else {
-      console.log("here")
       this.getLastUploadedImage()
     }
   };
