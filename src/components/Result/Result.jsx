@@ -78,6 +78,17 @@ const Result = (props) => {
           </div>
         </div>
       </motion.div>
+      <div className="branding">
+        created by{" "}
+        <span>
+          {" "}
+          <a href="twitter.com/johnlhaab">johnhaab</a>
+        </span>{" "}
+        -{" "}
+        <a className="link" href="devChallenges.io">
+          devchallenges.io
+        </a>
+      </div>
     </div>
   );
 };

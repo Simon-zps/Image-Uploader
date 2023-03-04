@@ -43,7 +43,7 @@ class App extends Component {
       }
       if (mostRecentItem) {
         const downloadUrl = await getDownloadURL(mostRecentItem.ref);
-        this.setState({ imageUrl: downloadUrl })
+        this.setState({ imageUrl: downloadUrl });
         this.setState({ hasRecent: true });
         this.setState({ hasResults: true });
         this.setState({ isLoading: false });
@@ -63,9 +63,9 @@ class App extends Component {
 
   handleHasResults = () => {
     if (this.state.imageUrl !== null) {
-      return
+      return;
     } else {
-      this.getLastUploadedImage()
+      this.getLastUploadedImage();
     }
   };
 
@@ -86,9 +86,15 @@ class App extends Component {
     } else if (this.state.isLoading === true) {
       return <Uploading />;
     } else if (
-      this.state.hasResults === true && this.state.isLoading === false
+      this.state.hasResults === true &&
+      this.state.isLoading === false
     ) {
-      return <Result getLastUploadedImage={this.getLastUploadedImage} imageUrl={this.state.imageUrl} />;
+      return (
+        <Result
+          getLastUploadedImage={this.getLastUploadedImage}
+          imageUrl={this.state.imageUrl}
+        />
+      );
     }
   };
 

@@ -52,3 +52,32 @@ $main-font: "Poppins", sans-serif;
         background-color: $main-color;
     }
 }
+
+.branding {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  
+    padding-bottom: 1rem;
+  
+    color: #00000088;
+  }
+  
+  span {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  a {
+    color: rgba(118, 120, 237, 0.704);
+  
+    text-decoration: none;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.533);
+  
+    padding-left: 5px;
+  }

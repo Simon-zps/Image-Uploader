@@ -11,36 +11,25 @@ import "./Home.scss";
 
 const Home = ({ setLoading, handleHasResults }) => {
   const [image, setImage] = useState(null);
-  const [imageDD, setImageDD] = useState(null);
   const [errMsg, setErrorMsg] = useState(null);
   const [hasErr, setErr] = useState(false);
 
-  useEffect(() => {
-    if (imageDD === null) {
-      return;
-    }
-
-    uploadImage(imageDD);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageDD]);
-
-  const uploadImage = () => {
-    if (image === null) return;
+  const uploadImage = (file) => {
+    if (!file) return;
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
-    uploadBytes(imageRef, image).then(() => {
+    uploadBytes(imageRef, file).then(() => {
       handleHasResults();
     });
   };
 
   const DragDrop = () => {
+    const [file, setFile] = useState(null);
+
     const onDrop = useCallback((acceptedFiles) => {
-      setImageDD(acceptedFiles[0]);
-      handleDragDrop();
-      console.log(
-        "successfully ran Drag & Drop function --- Output:",
-        setImageDD
-      );
+      setErr(false);
+      setFile(acceptedFiles[0]);
+      handleDragDrop(acceptedFiles[0]);
     }, []);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
       onDrop,
@@ -61,14 +50,14 @@ const Home = ({ setLoading, handleHasResults }) => {
     );
   };
 
-  const handleDragDrop = () => {
-    const file = imageDD;
+  const handleDragDrop = (file) => {
     console.log(file);
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
 
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
-      uploadImage();
+      uploadImage(file);
+      setErr(false);
     } else {
       setErr(true);
       showErrMsg();
@@ -81,7 +70,7 @@ const Home = ({ setLoading, handleHasResults }) => {
 
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
-      uploadImage();
+      uploadImage(file);
     } else {
       setErr(true);
       showErrMsg();
@@ -173,6 +162,17 @@ const Home = ({ setLoading, handleHasResults }) => {
           style={{ display: "none" }}
           onChange={(e) => handleImageChange(e)}
         />
+      </div>
+      <div className="branding">
+        created by{" "}
+        <span>
+          {" "}
+          <a href="twitter.com/johnlhaab">johnhaab</a>
+        </span>{" "}
+        -{" "}
+        <a className="link" href="devChallenges.io">
+          devchallenges.io
+        </a>
       </div>
     </div>
   );
