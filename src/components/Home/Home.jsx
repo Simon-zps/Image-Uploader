@@ -16,6 +16,7 @@ const Home = ({ setLoading, handleHasResults }) => {
 
   const uploadImage = (file) => {
     if (!file) return;
+    console.log(storage);
     setLoading(true);
     const imageRef = ref(storage, `images/${uuidv4()}`);
     uploadBytes(imageRef, file).then(() => {
