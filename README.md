@@ -21,9 +21,9 @@
     <br />
     <a href="https://adorable-queijadas-105dcd.netlify.app/">View Demo</a>
     ·
-    <a href="https://github.com/johnhaab/vesta">Report Bug</a>
+    <a href="https://github.com/johnhaab/img-uploader">Report Bug</a>
     ·
-    <a href="https://github.com/johnhaab/vesta">Request Feature</a>
+    <a href="https://github.com/johnhaab/img-uploader">Request Feature</a>
   </p>
 </div>
 
@@ -53,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![product-screenshot](/public/screenshot1.png)
+![product-screenshot](/123123213213.png)
 
 Img-Uploader is a modern and user-friendly web application built with ReactJS, Material-UI, SASS, Firebase, and Framer-Motion. With a sleek and intuitive design, Img-Uploader provides users with a seamless experience to upload and share their images.
 
