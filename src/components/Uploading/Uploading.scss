@@ -51,17 +51,25 @@ $main-font: "Poppins", sans-serif;
     .css-1r8wrcl-MuiLinearProgress-bar2 {
         background-color: $main-color;
     }
+
+    @media screen and (max-width: 768px) {
+        width: 22rem;
+    }
 }
 
 .branding {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    display: flex;
   
-    padding-bottom: 1rem;
+    padding-bottom: 1rem !important;
   
     color: #00000088;
+  
+    @media screen and (max-width: 768px) {
+        position: absolute;
+        top: 105%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
   }
   
   span {

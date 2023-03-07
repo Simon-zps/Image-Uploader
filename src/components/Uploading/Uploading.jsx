@@ -20,12 +20,12 @@ const Uploading = () => {
           </div>
         </div>
         <div className="branding">
-          created by{" "}
+          <p className="letter">created</p>
+          <p> by</p>
           <span>
-            {" "}
             <a href="twitter.com/johnlhaab">johnhaab</a>
-          </span>{" "}
-          -{" "}
+          </span>
+          -
           <a className="link" href="devChallenges.io">
             devchallenges.io
           </a>

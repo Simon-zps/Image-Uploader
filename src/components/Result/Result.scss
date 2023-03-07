@@ -18,7 +18,7 @@ $main-font: "Poppins", sans-serif;
         border-radius: 10px;
         padding: 20px;
     
-        width: 30rem;
+        width: 30rem; 
         height: auto;
     
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -96,6 +96,10 @@ $main-font: "Poppins", sans-serif;
 
                 // border: 2px solid red;
                 color: rgba(23, 22, 20, 1);
+
+                @media screen and (max-width: 768px) {
+                  width: 155px;
+                }
               }
 
               button {
@@ -114,36 +118,53 @@ $main-font: "Poppins", sans-serif;
                 &:active {
                     scale: 0.9;
                   }
+
+                  @media screen and (max-width: 768px) {
+                    transform: translate(-10%, 0%);
+                  }
               }
+
+              @media screen and (max-width: 768px) {
+                width: 16rem;
+              }
+        }
+
+        @media screen and (max-width: 768px) {
+          width: 22rem;
+          height: auto;
         }
     }
 }
 
 .branding {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  
-    padding-bottom: 1rem;
-  
-    color: #00000088;
+  display: flex;
+
+  padding-bottom: 1rem !important;
+
+  color: #00000088;
+
+  @media screen and (max-width: 768px) {
+      position: absolute;
+      top: 110% !important;
+      left: 50%;
+      transform: translate(-50%, -50%);
   }
-  
-  span {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  
-  a {
-    color: rgba(118, 120, 237, 0.704);
-  
-    text-decoration: none;
-  }
-  
-  .link {
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.533);
-  
-    padding-left: 5px;
-  }
+}
+
+span {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+a {
+  color: rgba(118, 120, 237, 0.704);
+
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.533);
+
+  padding-left: 5px;
+}
