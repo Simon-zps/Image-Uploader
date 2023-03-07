@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+<a name="readme-top"></a>
+<!-- PROJECT SHIELDS -->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!--
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+-->
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<!-- PROJECT LOGO -->
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h3 align="center">img-uploader</h3>
 
-### `npm test`
+  <p align="center">
+    Welcome to img-uploader, your go-to online tool for all your image uploading needs. Our web app is built using the latest technologies such as ReactJS, Material-UI, SASS, Firebase, and Framer-Motion to provide you with a modern and user-friendly interface. Whether you're a photographer, a designer, or just someone who needs to upload images online, img-uploader is the perfect solution for you. With its seamless uploading process and advanced features, you can easily upload and manage your images with just a few clicks. So why wait? Start uploading your images with img-uploader today!
+    <br />
+    <br />
+    <a href="https://fancy-blancmange-493c4f.netlify.app/">View Demo</a>
+    ·
+    <a href="https://github.com/johnhaab/img-uploader">Report Bug</a>
+    ·
+    <a href="https://github.com/johnhaab/img-uploader">Request Feature</a>
+  </p>
+</div>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![product-screenshot](/123123213213.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Img-Uploader is a modern and user-friendly web application built with ReactJS, Material-UI, SASS, Firebase, and Framer-Motion. With a sleek and intuitive design, Img-Uploader provides users with a seamless experience to upload and share their images.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The application offers error handling, ensuring that users can easily upload their images without any issues. Img-Uploader also includes a file size limit and file type validation to provide users with a secure and reliable service.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+With the latest technologies, Img-Uploader delivers fast and efficient results, making it the perfect solution for anyone looking for a reliable and efficient image uploader. The application also includes a progress bar to keep users informed about the upload status and a success message once the upload is complete.
 
-## Learn More
+Img-Uploader allows users to manage their uploaded images through Firebase, giving them complete control over their images. With a modern and customizable user interface, users can personalize their experience to their preferences with the included theme switcher and font switcher.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Whether you're a photographer, blogger, or simply someone who enjoys sharing images, Img-Uploader is the perfect tool for you.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Built With
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* [![REACT][REACT-img]][REACT-url]
+* [![FRAMER][FRAMER-img]][FRAMER-url]
+* [![MATERIAL UI][MUI-img]][MUI-url]
+* [![SASS][SASS-img]][SASS-url]
+* [![FIREBASE][FIREBASE-img]][FIREBASE-url]
 
-### Making a Progressive Web App
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+<!-- ROADMAP -->
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [ ] Ability to post the words to Social Media etc.
 
-### Deployment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+John Haab - [@johnlhaab](https://twitter.com/johnlhaab) - contact@johnhaab.xyz
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [devChallenges.io](https://devchallenges.io/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+[contributors-url]: https://github.com/johnhaab/Quotify/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
+[forks-url]: https://github.com/johnhaab/Quotify/network/members
+[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
+[stars-url]: https://github.com/johnhaab/Quotify/stargazers
+[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
+[issues-url]: https://github.com/johnhaab/Quotify/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+
+
+[FIREBASE-img]: https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white
+[FIREBASE-url]: https://firebase.google.com/
+
+
+[REACT-img]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[REACT-url]: https://reactjs.org/
+
+[FRAMER-img]: https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue
+[FRAMER-url]: https://www.framer.com/
+
+[MUI-img]: https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white
+[MUI-url]: https://mui.com/
+
+[SASS-img]: https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white
+[SASS-url]: https://sass-lang.com/
