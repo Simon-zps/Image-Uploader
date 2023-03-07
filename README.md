@@ -19,7 +19,7 @@
     Welcome to img-uploader, your go-to online tool for all your image uploading needs. Our web app is built using the latest technologies such as ReactJS, Material-UI, SASS, Firebase, and Framer-Motion to provide you with a modern and user-friendly interface. Whether you're a photographer, a designer, or just someone who needs to upload images online, img-uploader is the perfect solution for you. With its seamless uploading process and advanced features, you can easily upload and manage your images with just a few clicks. So why wait? Start uploading your images with img-uploader today!
     <br />
     <br />
-    <a href="https://adorable-queijadas-105dcd.netlify.app/">View Demo</a>
+    <a href="https://fancy-blancmange-493c4f.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/johnhaab/img-uploader">Report Bug</a>
     ·
