@@ -121,8 +121,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 John Haab - [@johnlhaab](https://twitter.com/johnlhaab) - contact@johnhaab.xyz
 
-Project Link: [https://github.com/johnhaab/img-uploader](https://github.com/johnhaab/img-uploader)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
