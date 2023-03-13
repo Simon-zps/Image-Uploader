@@ -20,10 +20,10 @@ const Uploading = () => {
           </div>
         </div>
         <div className="branding">
-          <p className="letter">created</p>
+          <p className="letter">backend</p>
           <p> by</p>
           <span>
-            <a href="twitter.com/johnlhaab">johnhaab</a>
+          <a href="https://twitter.com/genZsimon" target="blank">Simon</a>
           </span>
           -
           <a className="link" href="devChallenges.io">

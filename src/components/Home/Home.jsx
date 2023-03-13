@@ -1,27 +1,41 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { storage } from "../../services/firebase";
-import { ref, uploadBytes } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
 import dragAndDropImg from "../../assets/download.svg";
 import { useDropzone } from "react-dropzone";
 import Alert from "@mui/material/Alert";
 import { motion } from "framer-motion";
-
 import "./Home.scss";
+import axios from "axios";
 
-const Home = ({ setLoading, handleHasResults }) => {
+
+const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => {
   const [image, setImage] = useState(null);
   const [errMsg, setErrorMsg] = useState(null);
   const [hasErr, setErr] = useState(false);
 
-  const uploadImage = (file) => {
-    if (!file) return;
-    console.log(storage);
-    setLoading(true);
-    const imageRef = ref(storage, `images/${uuidv4()}`);
-    uploadBytes(imageRef, file).then(() => {
-      handleHasResults();
-    });
+  async function uploadImage(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+  
+    try {
+      const response = await axios.post('http://localhost:8000/api/upload-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(data);
+        
+        return data;
+      } 
+      
+      else {
+        console.error('Error uploading image:', response.status);
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
 
   const DragDrop = () => {
@@ -51,13 +65,15 @@ const Home = ({ setLoading, handleHasResults }) => {
     );
   };
 
-  const handleDragDrop = (file) => {
+  const handleDragDrop = async (file) => {
     console.log(file);
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
 
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
-      uploadImage(file);
+      setLoading(true);
+      await uploadImage(file);
+      setLoading(false);
       setErr(false);
     } else {
       setErr(true);
@@ -65,13 +81,15 @@ const Home = ({ setLoading, handleHasResults }) => {
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
 
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
-      uploadImage(file);
+      setLoading(true);
+      await uploadImage(file);
+      setLoading(false);
     } else {
       setErr(true);
       showErrMsg();
@@ -165,15 +183,11 @@ const Home = ({ setLoading, handleHasResults }) => {
         />
       </div>
       <div className="branding">
-        <p className="letter">created</p>
+        <p className="letter">backend</p>
         <p> by</p>
         <span>
-          <a href="twitter.com/johnlhaab">johnhaab</a>
+          <a href="https://twitter.com/genZsimon" target="blank">Simon</a>
         </span>
-        -
-        <a className="link" href="devChallenges.io">
-          devchallenges.io
-        </a>
       </div>
     </div>
   );

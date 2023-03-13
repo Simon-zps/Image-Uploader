@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import Home from "./components/Home/Home";
 import Uploading from "./components/Uploading/Uploading";
 import Result from "./components/Result/Result";
-
-import {
-  listAll,
-  ref,
-  getStorage,
-  getMetadata,
-  getDownloadURL,
-} from "firebase/storage";
+import axios from "axios";
 
 class App extends Component {
   constructor(props) {
@@ -25,24 +17,22 @@ class App extends Component {
     };
   }
 
+  // Define the function outside of the constructor
   getLastUploadedImage = async () => {
-    const storage = getStorage();
-    const imagesRef = ref(storage, "images/");
-
     try {
-      const res = await listAll(imagesRef);
+      const response = await axios.get("http://localhost:8000/api/images/");
+      const images = response.data;
       let mostRecentItem = null;
-      for (const item of res.items) {
-        const metadata = await getMetadata(item);
+      for (const item of images) {
         if (
           !mostRecentItem ||
-          metadata.timeCreated > mostRecentItem.metadata.timeCreated
+          item.timeCreated > mostRecentItem.timeCreated
         ) {
-          mostRecentItem = { ref: item, metadata };
+          mostRecentItem = item;
         }
       }
       if (mostRecentItem) {
-        const downloadUrl = await getDownloadURL(mostRecentItem.ref);
+        const downloadUrl = mostRecentItem.url;
         this.setState({ imageUrl: downloadUrl });
         this.setState({ hasRecent: true });
         this.setState({ hasResults: true });
@@ -65,9 +55,18 @@ class App extends Component {
     if (this.state.imageUrl !== null) {
       return;
     } else {
+      // Call the function using 'this' keyword
       this.getLastUploadedImage();
     }
   };
+
+  handleFileSelect = () => {
+    this.setState({ fileSelected: true });
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 2000);
+  };
+  
 
   handleWhatsHere = () => {
     if (
@@ -81,9 +80,13 @@ class App extends Component {
           imageUrl={this.state.imageUrl}
           setLoading={this.handleLoading}
           handleHasResults={this.handleHasResults}
+          handleFileSelect={this.handleFileSelect}
         />
       );
     } else if (this.state.isLoading === true) {
+      setTimeout(() => {
+        this.setState({ isLoading: false, hasResults: true });
+      }, 2000);
       return <Uploading />;
     } else if (
       this.state.hasResults === true &&
