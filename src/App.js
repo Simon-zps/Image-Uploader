@@ -20,7 +20,7 @@ class App extends Component {
   // Define the function outside of the constructor
   getLastUploadedImage = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/images/");
+      const response = await axios.get("http://localhost:8000/api/images");
       const images = response.data;
       let mostRecentItem = null;
 
@@ -30,7 +30,7 @@ class App extends Component {
           item.created > mostRecentItem.created
         ) {
           mostRecentItem = item;
-          console.log(mostRecentItem);
+          console.log("Most recent item: "+mostRecentItem);
         }
       }
       if (mostRecentItem) {
@@ -55,6 +55,7 @@ class App extends Component {
 
   handleResult = (resultState) => {
     this.setState({ hasResults: resultState });
+    this.getLastUploadedImage();
   };
 
   handleHasResults = () => {
