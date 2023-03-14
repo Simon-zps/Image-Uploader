@@ -7,7 +7,7 @@ import "./Home.scss";
 import axios from "axios";
 
 
-const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => {
+const Home = ({ setLoading, handleHasResults, handleResult }) => {
   const [image, setImage] = useState(null);
   const [errMsg, setErrorMsg] = useState(null);
   const [hasErr, setErr] = useState(false);
@@ -26,7 +26,6 @@ const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => 
       if (response.status === 200) {
         const data = response.data;
         console.log(data);
-        
         return data;
       } 
       
@@ -72,9 +71,15 @@ const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => 
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
       setLoading(true);
+
       await uploadImage(file);
+      
+      setTimeout(() => {
       setLoading(false);
       setErr(false);
+      handleResult(true);
+    }, 1000); // set the timeout to 1 second (for demonstration purposes)
+
     } else {
       setErr(true);
       showErrMsg();
@@ -89,7 +94,13 @@ const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => 
       setImage(file);
       setLoading(true);
       await uploadImage(file);
-      setLoading(false);
+      
+      setTimeout(() => {
+        setLoading(false);
+        setErr(false);
+        handleResult(true);
+      }, 1000); // set the timeout to 1 second (for demonstration purposes)
+
     } else {
       setErr(true);
       showErrMsg();
@@ -186,7 +197,7 @@ const Home = ({ setLoading, handleHasResults, handleFileSelect, isLoading }) => 
         <p className="letter">backend</p>
         <p> by</p>
         <span>
-          <a href="https://twitter.com/genZsimon" target="blank">Simon</a>
+          <a href="https://github.com/Simon-zps" target="blank">Simon</a>
         </span>
       </div>
     </div>

@@ -23,12 +23,14 @@ class App extends Component {
       const response = await axios.get("http://localhost:8000/api/images/");
       const images = response.data;
       let mostRecentItem = null;
+
       for (const item of images) {
         if (
           !mostRecentItem ||
-          item.timeCreated > mostRecentItem.timeCreated
+          item.created > mostRecentItem.created
         ) {
           mostRecentItem = item;
+          console.log(mostRecentItem);
         }
       }
       if (mostRecentItem) {
@@ -51,6 +53,10 @@ class App extends Component {
     this.setState({ isLoading: loadingState });
   };
 
+  handleResult = (resultState) => {
+    this.setState({ hasResults: resultState });
+  };
+
   handleHasResults = () => {
     if (this.state.imageUrl !== null) {
       return;
@@ -58,13 +64,6 @@ class App extends Component {
       // Call the function using 'this' keyword
       this.getLastUploadedImage();
     }
-  };
-
-  handleFileSelect = () => {
-    this.setState({ fileSelected: true });
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 2000);
   };
   
 
@@ -74,24 +73,24 @@ class App extends Component {
       this.state.image === null &&
       this.state.hasResults === false
     ) {
+      console.log("Displaying Home Page")
       return (
         <Home
           isLoading={this.state.isLoading}
           imageUrl={this.state.imageUrl}
           setLoading={this.handleLoading}
           handleHasResults={this.handleHasResults}
-          handleFileSelect={this.handleFileSelect}
+          handleResult={this.handleResult}
         />
       );
     } else if (this.state.isLoading === true) {
-      setTimeout(() => {
-        this.setState({ isLoading: false, hasResults: true });
-      }, 2000);
+      console.log("Displaying Uploading Page")
       return <Uploading />;
     } else if (
       this.state.hasResults === true &&
       this.state.isLoading === false
     ) {
+      console.log("Displaying Result Page")
       return (
         <Result
           getLastUploadedImage={this.getLastUploadedImage}

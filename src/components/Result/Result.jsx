@@ -82,12 +82,8 @@ const Result = (props) => {
         <p className="letter">backend</p>
         <p> by</p>
         <span>
-          <a href="https://twitter.com/genZsimon" target="blank">Simon</a>
+          <a href="https://github.com/Simon-zps" target="blank">Simon</a>
         </span>
-        -
-        <a className="link" href="devChallenges.io">
-          devchallenges.io
-        </a>
       </div>
     </div>
   );
