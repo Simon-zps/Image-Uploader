@@ -58,14 +58,7 @@ class App extends Component {
     this.getLastUploadedImage();
   };
 
-  handleHasResults = () => {
-    if (this.state.imageUrl !== null) {
-      return;
-    } else {
-      // Call the function using 'this' keyword
-      this.getLastUploadedImage();
-    }
-  };
+  
   
 
   handleWhatsHere = () => {
@@ -80,7 +73,7 @@ class App extends Component {
           isLoading={this.state.isLoading}
           imageUrl={this.state.imageUrl}
           setLoading={this.handleLoading}
-          handleHasResults={this.handleHasResults}
+          
           handleResult={this.handleResult}
         />
       );

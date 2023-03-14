@@ -7,7 +7,7 @@ import "./Home.scss";
 import axios from "axios";
 
 
-const Home = ({ setLoading, handleHasResults, handleResult }) => {
+const Home = ({ setLoading, handleResult }) => {
   const [image, setImage] = useState(null);
   const [errMsg, setErrorMsg] = useState(null);
   const [hasErr, setErr] = useState(false);
