@@ -2,7 +2,7 @@
 # Imgage uploader
 
 It's a modern, user-friendly web application built with ReactJS, Material-UI, SASS, Firebase/Django REST framework. Provides users with a seamless, intuitive platform to upload and share their images. 
-https://earnest-beignet-69166f.netlify.app/
+Live demo (version with firebase) https://earnest-beignet-69166f.netlify.app/
 
 ## Features
 
