@@ -64,35 +64,13 @@ const Home = ({ setLoading, handleResult }) => {
     );
   };
 
-  const handleDragDrop = async (file) => {
-    console.log(file);
+  const processFile = async (file) => {
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
-
+  
     if (file && allowedTypes.includes(file.type)) {
       setImage(file);
       setLoading(true);
-
-      await uploadImage(file);
-      
-      setTimeout(() => {
-      setLoading(false);
-      setErr(false);
-      handleResult(true);
-    }, 1000); // set the timeout to 1 second (for demonstration purposes)
-
-    } else {
-      setErr(true);
-      showErrMsg();
-    }
-  };
-
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/heic"];
-
-    if (file && allowedTypes.includes(file.type)) {
-      setImage(file);
-      setLoading(true);
+  
       await uploadImage(file);
       
       setTimeout(() => {
@@ -100,73 +78,53 @@ const Home = ({ setLoading, handleResult }) => {
         setErr(false);
         handleResult(true);
       }, 1000); // set the timeout to 1 second (for demonstration purposes)
-
+  
     } else {
       setErr(true);
       showErrMsg();
     }
   };
+  
+  const handleDragDrop = (file) => {
+    processFile(file);
+  };
+  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    processFile(file);
+  };
+  
 
   const showErrMsg = () => {
-    if (hasErr) {
-      setErrorMsg(
-        <motion.div
-          initial={{ y: -100, scale: 0, opacity: 0 }}
-          animate={{ y: 0, scale: 1, opacity: 1 }}
-          transition={{
-            type: "linear",
-            damping: 10,
-            stiffness: 100,
-            delayChildren: 0.5,
+    setErrorMsg(
+      <motion.div
+        initial={{ y: -100, scale: 0, opacity: 0 }}
+        animate={{ y: 0, scale: 1, opacity: 1 }}
+        transition={{
+          type: "linear",
+          damping: 10,
+          stiffness: 100,
+          delayChildren: 0.5,
+        }}
+      >
+        <Alert
+          icon={false}
+          onClose={() => {
+            hideErrMsg();
           }}
-        >
-          <Alert
-            icon={false}
-            onClose={() => {
-              hideErrMsg();
-            }}
-            style={{
-              marginBottom: "1.5rem",
-              backgroundColor: "#7678ed",
-              color: "#fff",
-            }}
-            className="err-msg"
-          >
-            Please upload a valid image file. (png, jpg, jpeg, heic)
-          </Alert>
-        </motion.div>
-      );
-    } else {
-      setErrorMsg(
-        <motion.div
-          initial={{ y: -100, scale: 0, opacity: 0 }}
-          animate={{ y: 0, scale: 1, opacity: 1 }}
-          transition={{
-            type: "linear",
-            damping: 10,
-            stiffness: 100,
-            delayChildren: 0.5,
+          style={{
+            marginBottom: "1.5rem",
+            backgroundColor: "#7678ed",
+            color: "#fff",
           }}
+          className="err-msg"
         >
-          <Alert
-            icon={false}
-            onClose={() => {
-              hideErrMsg();
-            }}
-            style={{
-              marginBottom: "1.5rem",
-              backgroundColor: "#7678ed",
-              color: "#fff",
-            }}
-            className="err-msg"
-          >
-            Please upload a valid image file. (png, jpg, jpeg, heic)
-          </Alert>
-        </motion.div>
-      );
-      setErr(true);
-    }
-  };
+          Please upload a valid image file. (png, jpg, jpeg, heic)
+        </Alert>
+      </motion.div>
+    );
+    setErr(true);
+  };  
 
   const hideErrMsg = () => {
     setErrorMsg(null);
